@@ -1,0 +1,45 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+	<div class="content-container">
+		
+		<div class="form-container">
+			<header class="header">
+				<h1>{{ title }}</h1>
+	 		</header>
+			<form action="/submit" id="textform" method="post">
+				<textarea name="content" rows="4" cols="50" placeholder="Внесите данные..."></textarea>
+				<br>
+				<div class="form-wrapper">
+					<input type="text" name="author" placeholder="Ваше имя">
+					<input class="btn-grad" type="submit" value="Отправить">
+				</div>
+			</form>
+
+			<a href="{{node_address}}/mine" target="_blank">
+				<button class="btn-grad"> Запрос на рассчёт блока</button>
+			</a>
+			<a href="/">
+				<button class="btn-grad">Обновить сеть</button>
+			</a>
+		</div>
+		<div class="post-container">
+
+			{% for post in posts %}
+			<div class="post_box">
+				<div class="post_box-header">
+					<div style="background: rgb(0, 97, 146) none repeat scroll 0% 0%; box-shadow: rgb(0, 97, 146) 0px 0px 0px 2px;" class="post_box-avatar">{{post.author[0]}}</div>
+					<div class="name-header">{{post.hash}}</div>
+					<div class="post_box-subtitle"> Posted at <i>{{readable_time(post.timestamp)}}</i></div>
+				</div>
+				<div>
+					<div class="post_box-body">
+						<p>{{post.content}}</p>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+{% endblock %}
